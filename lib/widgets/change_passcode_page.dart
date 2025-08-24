@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ChangePasscodePage extends StatefulWidget {
   const ChangePasscodePage({super.key});
@@ -8,126 +9,187 @@ class ChangePasscodePage extends StatefulWidget {
 }
 
 class _ChangePasscodePageState extends State<ChangePasscodePage> {
+  static const blue = Color(0xFF3859C5);
+  static const pageBg = Color(0xFFF0F0F0);
+
   final _pinController = TextEditingController();
 
   void _onKeyTap(String value) {
     if (value == 'submit') {
+      if (_pinController.text.length == 6) {}
       return;
     }
     if (_pinController.text.length < 6) {
       _pinController.text += value;
+      HapticFeedback.selectionClick();
       setState(() {});
     }
   }
 
   void _backspace() {
     if (_pinController.text.isNotEmpty) {
-      _pinController.text =
-          _pinController.text.substring(0, _pinController.text.length - 1);
+      _pinController.text = _pinController.text.substring(
+        0,
+        _pinController.text.length - 1,
+      );
       setState(() {});
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    const blue = Color(0xFF3859C5);
-
     return Scaffold(
-      backgroundColor: const Color(0xFFF0F0F0), 
+      backgroundColor: pageBg,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          padding: const EdgeInsets.fromLTRB(40, 16, 35, 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextButton.icon(
-                style: TextButton.styleFrom(foregroundColor: blue),
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.chevron_left, size: 18),
-                label: const Text(
-                  'Back',
-                  style: TextStyle(
-                    fontFamily: 'Gilroy',
-                    fontWeight: FontWeight.w800,
-                    fontSize: 20,
+              Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton.icon(
+                  style: TextButton.styleFrom(
+                    foregroundColor: blue,
+                    padding: EdgeInsets.zero,
+                  ),
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(Icons.chevron_left, size: 18),
+                  label: const Text(
+                    'Back',
+                    style: TextStyle(
+                      fontFamily: 'Gilroy',
+                      fontWeight: FontWeight.w800,
+                      fontSize: 20,
+                      color: blue,
+                    ),
                   ),
                 ),
               ),
-              const SizedBox(height: 12),
-
+              const SizedBox(height: 50),
               const Text(
                 'Enter Your Old Pin',
+                textAlign: TextAlign.start,
                 style: TextStyle(
                   fontFamily: 'Gilroy',
                   fontWeight: FontWeight.w800,
                   fontSize: 28,
                   color: Color(0xFF3859C5),
+                  height: 1.2,
                 ),
               ),
               const SizedBox(height: 6),
               Text(
-                'Your passcode will be used every time you enter the app and is designed to keep trespassers out.',
+                "Your passcode will be used every time you enter the app and it's designed to keep trespassers out.",
+                textAlign: TextAlign.start,
                 style: TextStyle(
                   fontFamily: 'Gilroy',
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w300,
                   fontSize: 15,
-                  color: const Color(0xFF3859C5).withOpacity(0.7),
+                  color: blue.withOpacity(0.7),
+                  height: 1.4,
                 ),
               ),
-              const SizedBox(height: 18),
-
-              SizedBox(
-                width: 330,   
-                height: 48,     
-                child: TextField(
-                  controller: _pinController,
-                  readOnly: true,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 14,
-                      vertical: 14,
+              const SizedBox(height: 20),
+              Container(
+                width: 330,
+                height: 56,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(color: blue, width: 2),
+                  boxShadow: [
+                    BoxShadow(
+                      color: blue.withOpacity(
+                        0.1,
+                      ), 
+                      blurRadius: 10, 
+                      spreadRadius: 3, 
+                      offset: Offset(0, 0), 
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: blue, width: 2),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: blue, width: 2),
-                    ),
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.backspace_outlined, color: blue),
-                      onPressed: _backspace,
-                      tooltip: 'Delete',
-                    ),
-                  ),
-                  style: const TextStyle(
-                    fontFamily: 'Gilroy',
-                    fontSize: 18,
-                    color: blue,
-                    fontWeight: FontWeight.w800,
-                    letterSpacing: 3,
+                  ],
+                ),
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: _pinController,
+                          readOnly: true,
+                          obscureText: true,
+                          enableSuggestions: false,
+                          autocorrect: false,
+                          textAlign: TextAlign.center,
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                          ),
+                          style: const TextStyle(
+                            fontFamily: 'Gilroy',
+                            fontSize: 18,
+                            color: blue,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: 3,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        tooltip: 'Delete',
+                        onPressed: _backspace,
+                        icon: const Icon(
+                          Icons.backspace_outlined,
+                          color: Color.fromARGB(255, 180, 177, 177),
+                          size: 18,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
 
-              const SizedBox(height: 24),
-
+              const SizedBox(height: 26),
               Expanded(
                 child: Center(
-                  child: Wrap(
-                    spacing: 24,
-                    runSpacing: 18,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      for (final n in ['1','2','3','4','5','6','7','8','9',''])
-                        _NumButton(label: n, onTap: () => _onKeyTap(n)),
-                      _NumButton(label: '0', onTap: () => _onKeyTap('0')),
-                      _NumButton(
-                        label: 'submit',
-                        icon: Icons.arrow_forward,
-                        onTap: () => _onKeyTap('submit'),
-                        width: 64,
-                        height: 52,
+                      _KeypadRow(
+                        children: [
+                          _Key('1', onTap: () => _onKeyTap('1')),
+                          _Key('2', onTap: () => _onKeyTap('2')),
+                          _Key('3', onTap: () => _onKeyTap('3')),
+                        ],
+                      ),
+                      const SizedBox(height: 25),
+                      _KeypadRow(
+                        children: [
+                          _Key('4', onTap: () => _onKeyTap('4')),
+                          _Key('5', onTap: () => _onKeyTap('5')),
+                          _Key('6', onTap: () => _onKeyTap('6')),
+                        ],
+                      ),
+                      const SizedBox(height: 25),
+                      _KeypadRow(
+                        children: [
+                          _Key('7', onTap: () => _onKeyTap('7')),
+                          _Key('8', onTap: () => _onKeyTap('8')),
+                          _Key('9', onTap: () => _onKeyTap('9')),
+                        ],
+                      ),
+                      const SizedBox(height: 25),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const SizedBox(width: _Key.size),
+                          const SizedBox(width: 30),
+                          _Key('0', onTap: () => _onKeyTap('0')),
+                          const SizedBox(width: 45),
+                          _IconKey(
+                            icon: Icons.arrow_forward_rounded,
+                            onTap: () => _onKeyTap('submit'),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -142,56 +204,90 @@ class _ChangePasscodePageState extends State<ChangePasscodePage> {
   }
 }
 
-class _NumButton extends StatelessWidget {
-  final String label;
-  final IconData? icon;
-  final VoidCallback onTap;
-  final double width;
-  final double height;
-
-  const _NumButton({
-    required this.label,
-    required this.onTap,
-    this.icon,
-    this.width = 74,  
-    this.height = 64, 
-  });
+class _KeypadRow extends StatelessWidget {
+  final List<Widget> children;
+  const _KeypadRow({required this.children});
 
   @override
   Widget build(BuildContext context) {
-    const blue = Color(0xFF3859C5);
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        children[0],
+        const SizedBox(width: 25),
+        children[1],
+        const SizedBox(width: 25),
+        children[2],
+      ],
+    );
+  }
+}
 
+class _Key extends StatelessWidget {
+  static const double size = 70;
+  const _Key(this.label, {required this.onTap});
+
+  final String label;
+  final VoidCallback onTap;
+
+  static const blue = Color(0xFF3859C5);
+
+  @override
+  Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(14),
       onTap: onTap,
       child: Ink(
-        width: width,
-        height: height,
+        width: size,
+        height: 70,
         decoration: BoxDecoration(
           color: blue,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: blue.withOpacity(0.25),
-              blurRadius: 12,
-              offset: const Offset(0, 6),
-            ),
-          ],
+          borderRadius: BorderRadius.circular(25),
         ),
         child: Center(
-          child: icon != null
-              ? Icon(icon, color: Colors.white, size: 22)
-              : Text(
-                  label,
-                  style: const TextStyle(
-                    fontFamily: 'Gilroy',
-                    fontWeight: FontWeight.w800,
-                    fontSize: 22,
-                    color: Colors.white,
-                  ),
-                ),
+          child: Text(
+            label,
+            style: const TextStyle(
+              fontFamily: 'Gilroy',
+              fontWeight: FontWeight.w300,
+              fontSize: 25,
+              color: Colors.white,
+            ),
+          ),
         ),
       ),
+    );
+  }
+}
+
+class _IconKey extends StatelessWidget {
+  const _IconKey({required this.icon, required this.onTap});
+  final IconData icon;
+  final VoidCallback onTap;
+
+  static const blue = Color(0xFF3859C5);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(height: 15),
+        InkWell(
+          borderRadius: BorderRadius.circular(14),
+          onTap: onTap,
+          child: Ink(
+            width: 43,
+            height: 43,
+            decoration: BoxDecoration(
+              color: blue,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Center(
+              child: Icon(icon, color: Color(0xFFF0F0F0), size: 20),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
