@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-//postions and sizes done
-//check the font
 class CategoryFile extends StatelessWidget {
   final String iconPath;
   final String title;
   final int count;
+  final VoidCallback? onTap; 
 
   const CategoryFile({
     required this.iconPath,
     required this.title,
     required this.count,
+    this.onTap,
   });
 
   static const _blue = Color(0xFF3859C5);
@@ -38,6 +37,7 @@ class CategoryFile extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(10),
+          onTap: onTap, 
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
@@ -51,7 +51,6 @@ class CategoryFile extends StatelessWidget {
                       fontFamily: 'Gilroy',
                       fontWeight: FontWeight.w400,
                       fontSize: 18,
-
                       color: Color(0xFF898989),
                     ),
                   ),

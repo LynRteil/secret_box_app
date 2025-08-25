@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:secret_box/widgets/category_file.dart';
 import 'package:secret_box/widgets/check_option_section.dart';
 import 'package:secret_box/widgets/custom_bottom_navbar.dart';
+import 'package:secret_box/widgets/files_page.dart';
 import 'package:secret_box/widgets/notifications_page.dart';
 import 'package:secret_box/widgets/settings_page.dart';
 import 'package:secret_box/widgets/upload_options_bottom_sheet.dart';
 
-class FilesPage extends StatefulWidget {
-  const FilesPage({super.key});
+class Photos extends StatefulWidget {
+  const Photos({super.key});
 
   @override
-  State<FilesPage> createState() => _FilesPageState();
+  State<Photos> createState() => _FilesPageState();
 }
 
-class _FilesPageState extends State<FilesPage> {
-  //postions and sizes done
-
+class _FilesPageState extends State<Photos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,19 +25,35 @@ class _FilesPageState extends State<FilesPage> {
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         toolbarHeight: 164,
-        titleSpacing: 20,
+        titleSpacing: 10,
         scrolledUnderElevation: 0,
         title: Container(
-          margin: const EdgeInsets.fromLTRB(10, 48, 15, 15),
-          child: const Text(
-            "Files",
-            style: TextStyle(
-              fontSize: 28,
-              fontFamily: "Gilroy",
-              fontWeight: FontWeight.w800,
+          margin: const EdgeInsets.fromLTRB(0, 48, 15, 15),
+          child: Row(
+            children: [
+              IconButton(
+                icon: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: Color(0xFF3859C5),
+                  size: 15,
+                ),
+                onPressed: () => Navigator.pop(context),
+              ),
 
-              color: Color(0xFF3859C5),
-            ),
+              const Expanded(
+                child: Text(
+                  "Photos",
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: "Gilroy",
+                    fontWeight: FontWeight.w800,
+                    color: Color(0xFF3859C5),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         actions: [
@@ -49,11 +63,18 @@ class _FilesPageState extends State<FilesPage> {
               children: [
                 IconButton(
                   icon: SvgPicture.asset(
-                    "assets/icons/apps_boxes_dashboard_menu_select_icon.svg",
+                    "assets/icons/apps_boxes_dashboard_menu_select_icon_with_color.svg",
                     height: 18,
                     width: 18,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                     Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const FilesPage(),
+                      ),
+                    );
+                  },
                 ),
                 IconButton(
                   icon: SvgPicture.asset(
@@ -168,68 +189,13 @@ class _FilesPageState extends State<FilesPage> {
         ),
       ),
 
-      body: ListView(
-        children: [
-          SizedBox(height: 8),
-          CategoryFile(
-            iconPath: "assets/icons/documents.svg",
-            title: 'Documents',
-            count: 0,
-            onTap: () {
-              Navigator.pushNamed(context, '/documents');
-            },
-          ),
-          CategoryFile(
-            iconPath: "assets/icons/photos.svg",
-            title: 'Photos',
-            count: 0,
-            onTap: () {
-              Navigator.pushNamed(context, '/photos');
-            },
-          ),
-          CategoryFile(
-            iconPath: "assets/icons/videos.svg",
-            title: 'Videos',
-            count: 0,
-            onTap: () {
-              Navigator.pushNamed(context, '/videos');
-            },
-          ),
-          CategoryFile(
-            iconPath: "assets/icons/contacts.svg",
-            title: 'Contacts',
-            count: 0,
-            onTap: () {
-              Navigator.pushNamed(context, '/contacts');
-            },
-          ),
-          CategoryFile(
-            iconPath: "assets/icons/music.svg",
-            title: 'Music',
-            count: 0,
-            onTap: () {
-              Navigator.pushNamed(context, '/music');
-            },
-          ),
-          CategoryFile(
-            iconPath: "assets/icons/audios.svg",
-            title: 'Audios',
-            count: 0,
-            onTap: () {
-              Navigator.pushNamed(context, '/audios');
-            },
-          ),
-          CategoryFile(
-            iconPath: "assets/icons/folders.svg",
-            title: 'Folders',
-            count: 0,
-            onTap: () {
-              Navigator.pushNamed(context, '/folders');
-            },
-          ),
-        ],
+      body: Center(
+        child: Text(
+          'Tap the  +  button to importyour documents.',
+          style: TextStyle(color: Color(0xFF777777).withOpacity(0.7),fontSize: 20,
+          fontWeight: FontWeight.w400,fontFamily: 'Gilroy'),
+        ),
       ),
-
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: SizedBox(
         width: 53,

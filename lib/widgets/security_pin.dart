@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:secret_box/utils/popup_helper.dart';
 import 'package:secret_box/widgets/Keypad_row.dart';
 import 'package:secret_box/widgets/icon_key.dart';
 import 'package:secret_box/widgets/key_button.dart';
@@ -37,6 +38,18 @@ class _SecurityPinState extends State<SecurityPin> {
       );
       setState(() {});
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showFaceIdPopup(
+        context,
+        message: 'Face ID Not Activated',
+        iconAsset: 'assets/icons/face_id_icon.png',
+      );
+    });
   }
 
   @override
@@ -162,33 +175,19 @@ class _SecurityPinState extends State<SecurityPin> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          PopupMenuButton(
+                          GestureDetector(
+                            onTap: () {
+                              showFaceIdPopup(
+                                context,
+                                message: 'Face ID Not Activated',
+                                iconAsset: 'assets/icons/face_id_icon.png',
+                              );
+                            },
                             child: Image.asset(
-                              'assets/icons/face_id_icon.png', 
+                              'assets/icons/face_id_icon.png',
                               width: 32,
                               height: 32,
                             ),
-                            offset: const Offset(
-                              0,
-                              -8,
-                            ),
-                            color: const Color(0xFF3859C5),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            itemBuilder: (context) => [
-                              const PopupMenuItem(
-                                enabled: false,
-                                height: 36,
-                                child: Text(
-                                  'Face ID Not Activated',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                            ],
                           ),
 
                           const SizedBox(width: 30),
