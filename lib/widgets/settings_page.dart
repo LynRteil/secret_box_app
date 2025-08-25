@@ -53,10 +53,10 @@ class SettingsPage extends StatelessWidget {
                   "Nederlands",
                   "Francais",
                   "Italiana",
-                   "Polskie",
+                  "Polskie",
                   "Svenska",
                   "Potugues",
-                   "Gaeilge",
+                  "Gaeilge",
                   "Pyccknn",
                   "Norsk",
                   "Bulgarian",
@@ -96,13 +96,18 @@ class SettingsPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const Text(
-                    "Sign Out",
-                    style: TextStyle(
-                      fontFamily: "Gilroy",
-                      fontWeight: FontWeight.w800,
-                      fontSize: 18,
-                      color: Colors.white,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacementNamed(context, '/home');
+                    },
+                    child: const Text(
+                      "Sign Out",
+                      style: TextStyle(
+                        fontFamily: "Gilroy",
+                        fontWeight: FontWeight.w800,
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:secret_box/widgets/cloud_page.dart';
 import 'package:secret_box/widgets/files_page.dart';
+import 'package:secret_box/widgets/home_page.dart';
+import 'package:secret_box/widgets/plan_page.dart';
 import 'package:secret_box/widgets/pro_user_page.dart';
 import 'package:secret_box/widgets/secret_web_page.dart';
 
@@ -21,6 +23,8 @@ class MyApp extends StatelessWidget {
         '/secretWeb': (context) => const SecretWebPage(),
         '/cloud': (context) => const CloudPage(),
         '/proUser': (context) => const ProUserPage(),
+        '/home':(context)=>const HomePage(),
+        '/plan':(context)=>const PlanPage(),
       },
     );
   }
