@@ -4,14 +4,14 @@ import 'package:secret_box/widgets/Keypad_row.dart';
 import 'package:secret_box/widgets/icon_key.dart';
 import 'package:secret_box/widgets/key_button.dart';
 
-class ChangePasscodePage extends StatefulWidget {
-  const ChangePasscodePage({super.key});
+class SecurityPin extends StatefulWidget {
+  const SecurityPin({super.key});
 
   @override
-  State<ChangePasscodePage> createState() => _ChangePasscodePageState();
+  State<SecurityPin> createState() => _SecurityPinState();
 }
 
-class _ChangePasscodePageState extends State<ChangePasscodePage> {
+class _SecurityPinState extends State<SecurityPin> {
   static const blue = Color(0xFF3859C5);
   static const pageBg = Color(0xFFF0F0F0);
 
@@ -49,29 +49,9 @@ class _ChangePasscodePageState extends State<ChangePasscodePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: TextButton.icon(
-                  style: TextButton.styleFrom(
-                    foregroundColor: blue,
-                    padding: EdgeInsets.zero,
-                  ),
-                  onPressed: () => Navigator.pop(context),
-                  icon: const Icon(Icons.chevron_left, size: 18),
-                  label: const Text(
-                    'Back',
-                    style: TextStyle(
-                      fontFamily: 'Gilroy',
-                      fontWeight: FontWeight.w800,
-                      fontSize: 20,
-                      color: blue,
-                    ),
-                  ),
-                ),
-              ),
               const SizedBox(height: 50),
               const Text(
-                'Enter Your Old Pin',
+                'Enter Your Security Pin',
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontFamily: 'Gilroy',
@@ -103,12 +83,10 @@ class _ChangePasscodePageState extends State<ChangePasscodePage> {
                   border: Border.all(color: blue, width: 2),
                   boxShadow: [
                     BoxShadow(
-                      color: blue.withOpacity(
-                        0.1,
-                      ), 
-                      blurRadius: 10, 
-                      spreadRadius: 3, 
-                      offset: Offset(0, 0), 
+                      color: blue.withOpacity(0.1),
+                      blurRadius: 10,
+                      spreadRadius: 3,
+                      offset: Offset(0, 0),
                     ),
                   ],
                 ),
@@ -184,7 +162,35 @@ class _ChangePasscodePageState extends State<ChangePasscodePage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const SizedBox(width: KeyButton.size),
+                          PopupMenuButton(
+                            child: Image.asset(
+                              'assets/icons/face_id_icon.png', 
+                              width: 32,
+                              height: 32,
+                            ),
+                            offset: const Offset(
+                              0,
+                              -8,
+                            ),
+                            color: const Color(0xFF3859C5),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            itemBuilder: (context) => [
+                              const PopupMenuItem(
+                                enabled: false,
+                                height: 36,
+                                child: Text(
+                                  'Face ID Not Activated',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+
                           const SizedBox(width: 30),
                           KeyButton('0', onTap: () => _onKeyTap('0')),
                           const SizedBox(width: 45),
@@ -206,4 +212,3 @@ class _ChangePasscodePageState extends State<ChangePasscodePage> {
     );
   }
 }
-

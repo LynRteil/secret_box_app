@@ -131,7 +131,9 @@ class _PlanPageState extends State<PlanPage> {
                   height: 70,
                   width: 332,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/authScreen');
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
