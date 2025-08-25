@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:secret_box/widgets/audios.dart';
 import 'package:secret_box/widgets/authScreen.dart';
+import 'package:secret_box/widgets/check_email.dart';
 import 'package:secret_box/widgets/cloud_page.dart';
 import 'package:secret_box/widgets/contacts.dart';
 import 'package:secret_box/widgets/documents.dart';
@@ -14,6 +15,7 @@ import 'package:secret_box/widgets/plan_page.dart';
 import 'package:secret_box/widgets/pro_user_page.dart';
 import 'package:secret_box/widgets/secret_web_page.dart';
 import 'package:secret_box/widgets/security_pin.dart';
+import 'package:secret_box/widgets/set_new_password.dart';
 import 'package:secret_box/widgets/sign_up.dart';
 import 'package:secret_box/widgets/videos.dart';
 
@@ -47,6 +49,8 @@ class MyApp extends StatelessWidget {
         '/audios': (context) => const Audios(),
         '/folders': (context) => const Folders(),
         '/forgot-password':(context)=>const ForgotPassword(),
+        '/checkemail':(context)=>const CheckEmail(),
+        '/setnewpassword':(context)=>const SetNewPassword(),
       },
     );
   }

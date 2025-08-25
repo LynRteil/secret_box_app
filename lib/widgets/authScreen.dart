@@ -160,7 +160,7 @@ class _AuthscreenState extends State<Authscreen> {
               height: 56,
               width: 330,
               child: ElevatedButton(
-                onPressed: is_filled ? () {} : null,
+                onPressed: is_filled ? () {           Navigator.pushNamed(context, '/securitypin');} : null,
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.resolveWith<Color>((
                     states,

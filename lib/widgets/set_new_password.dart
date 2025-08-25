@@ -1,40 +1,44 @@
 import 'package:flutter/material.dart';
-
-class ForgotPassword extends StatefulWidget {
-  const ForgotPassword({super.key});
+class SetNewPassword extends StatefulWidget {
+  const SetNewPassword({super.key});
 
   @override
-  State<ForgotPassword> createState() => _SignUpState();
+  State<SetNewPassword> createState() => _SetNewPasswordState();
 }
 
-class _SignUpState extends State<ForgotPassword> {
-  final emailController = TextEditingController();
-
+class _SetNewPasswordState extends State<SetNewPassword> {
+  bool _obscureText = true;
+  final passwordController = TextEditingController();
+  final confirmpasswordController = TextEditingController();
   bool is_filled = false;
 
   @override
   void initState() {
     super.initState();
-    emailController.addListener(_checkFilled);
+    passwordController.addListener(_checkFilled);
+    confirmpasswordController.addListener(_checkFilled);
   }
 
   @override
   void dispose() {
-    emailController.dispose();
-
+    passwordController.dispose();
+    confirmpasswordController.dispose();
     super.dispose();
   }
 
   void _checkFilled() {
     setState(() {
-      is_filled = emailController.text.isNotEmpty;
+      is_filled =
+          passwordController.text.isNotEmpty &&
+          confirmpasswordController.text.isNotEmpty;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-     body: SafeArea(
+  return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(10, 24, 22, 24),
           child: Column(
@@ -48,17 +52,17 @@ class _SignUpState extends State<ForgotPassword> {
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
                     icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                        size: 16, color:  Color(0XFF3859C5)),
+                        size: 16, color: Color(0XFF3859C5)),
                     onPressed: () => Navigator.pop(context),
                   ),
                   const SizedBox(width: 6),
                   const Text(
-                    'Forgot Password',
+                    'Set New Password',
                     style: TextStyle(
                       fontFamily: 'Gilroy',
                       fontWeight: FontWeight.w800,
                       fontSize: 28,
-                      color:  Color(0XFF3859C5),
+                      color: Color(0XFF3859C5),
                     ),
                   ),
                 ],
@@ -67,21 +71,23 @@ class _SignUpState extends State<ForgotPassword> {
               Padding(
                 padding: const EdgeInsets.only(left:50),
                 child: Text(
-                  'We will send you the reset instructions by Email',
+                  'Enter Your New Password',
                   style: TextStyle(
                     fontFamily: 'Gilroy',
                     fontWeight: FontWeight.w400,
                     fontSize: 15,
-                    color: Color(0XFF3859C5),
+                    color: Color(0XFF3859C5).withOpacity(0.7),
                   ),
                 ),
               ),
-              const SizedBox(height: 90),
+            SizedBox(height: 40),
+           
             TextField(
-              controller: emailController,
-
+              obscureText: _obscureText,
+              obscuringCharacter: '*',
+              controller: passwordController,
               decoration: InputDecoration(
-                hintText: 'Email address',
+                hintText: 'Password',
                 hintStyle: TextStyle(
                   fontSize: 18,
                   fontFamily: 'Gilroy',
@@ -89,16 +95,27 @@ class _SignUpState extends State<ForgotPassword> {
                   color: const Color(0XFF3859C5).withOpacity(0.5),
                 ),
                 border: InputBorder.none,
-
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0XFF3859C5), width: 2),
                   borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide(color: Color(0XFF3859C5), width: 2),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0XFF3859C5), width: 2),
                   borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide(color: Color(0XFF3859C5), width: 2),
+                ),
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                  icon: Icon(
+                    _obscureText ? Icons.visibility_off : Icons.visibility,
+                  ),
+                  color: Color(0XFF3859C5).withOpacity(0.5),
                 ),
               ),
+
               style: TextStyle(
                 fontSize: 18,
                 fontFamily: 'Gilroy',
@@ -106,14 +123,55 @@ class _SignUpState extends State<ForgotPassword> {
                 color: Color(0XFF3859C5),
               ),
             ),
+            SizedBox(height: 15),
+            TextField(
+              obscureText: _obscureText,
+              obscuringCharacter: '*',
+              controller: confirmpasswordController,
+              decoration: InputDecoration(
+                hintText: ' Confirm Password',
+                hintStyle: TextStyle(
+                  fontSize: 18,
+                  fontFamily: 'Gilroy',
+                  fontWeight: FontWeight.w400,
+                  color: const Color(0XFF3859C5).withOpacity(0.5),
+                ),
+                border: InputBorder.none,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide(color: Color(0XFF3859C5), width: 2),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide(color: Color(0XFF3859C5), width: 2),
+                ),
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                  icon: Icon(
+                    _obscureText ? Icons.visibility_off : Icons.visibility,
+                  ),
+                  color: Color(0XFF3859C5).withOpacity(0.5),
+                ),
+              ),
 
-            SizedBox(height: 150),
+              style: TextStyle(
+                fontSize: 18,
+                fontFamily: 'Gilroy',
+                fontWeight: FontWeight.w400,
+                color: Color(0XFF3859C5),
+              ),
+            ),
+            SizedBox(height: 90),
             SizedBox(
               height: 56,
               width: 330,
               child: ElevatedButton(
                 onPressed: is_filled ? () {
-                  Navigator.pushNamed(context, '/checkemail');
+                  Navigator.pushNamed(context, '/securitypin');
                 } : null,
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.resolveWith<Color>((
@@ -140,7 +198,7 @@ class _SignUpState extends State<ForgotPassword> {
                   elevation: MaterialStateProperty.all(0),
                 ),
                 child: const Text(
-                  'Reset Password',
+                  'Continue',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
@@ -151,9 +209,8 @@ class _SignUpState extends State<ForgotPassword> {
             ),
           ],
         ),
-        )
-     )
-    );
-    
+      ),
+    ),
+  );
   }
 }

@@ -165,7 +165,7 @@ class _PlanPageState extends State<PlanPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 4),
+                SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
