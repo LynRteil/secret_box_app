@@ -138,16 +138,23 @@ class _AuthscreenState extends State<Authscreen> {
             ),
             Align(
               alignment: Alignment.centerRight,
-              child: Text(
-                'Forgot Password',
-                style: TextStyle(
-                  color: Color(0XFF3859C5).withOpacity(0.5),
-                  fontSize: 14,
-                  fontFamily: 'Gilroy',
-                  fontWeight: FontWeight.w400,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/forgot-password');
+                },
+                child: Text(
+                  'Forgot Password',
+                  style: TextStyle(
+                    color: const Color(0XFF3859C5).withOpacity(0.5),
+                    fontSize: 14,
+                    fontFamily: 'Gilroy',
+                    fontWeight: FontWeight.w400,
+                 
+                  ),
                 ),
               ),
             ),
+
             SizedBox(height: 80),
             SizedBox(
               height: 56,
@@ -251,7 +258,9 @@ class _AuthscreenState extends State<Authscreen> {
               width: 330,
 
               child: ElevatedButton.icon(
-                onPressed: () {Navigator.pushNamed(context, '/securitypin');},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/securitypin');
+                },
 
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0XFF3859C5),
@@ -276,7 +285,9 @@ class _AuthscreenState extends State<Authscreen> {
               height: 56,
               width: 330,
               child: ElevatedButton.icon(
-                onPressed: () {Navigator.pushNamed(context, '/securitypin');},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/securitypin');
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0XFFEFEFEF),
                   foregroundColor: Color(0xFF3859C5),

@@ -6,6 +6,7 @@ import 'package:secret_box/widgets/contacts.dart';
 import 'package:secret_box/widgets/documents.dart';
 import 'package:secret_box/widgets/files_page.dart';
 import 'package:secret_box/widgets/folders.dart';
+import 'package:secret_box/widgets/forgot_password.dart';
 import 'package:secret_box/widgets/home_page.dart';
 import 'package:secret_box/widgets/music.dart';
 import 'package:secret_box/widgets/photos.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         '/music': (context) => const Music(),
         '/audios': (context) => const Audios(),
         '/folders': (context) => const Folders(),
+        '/forgot-password':(context)=>const ForgotPassword(),
       },
     );
   }
