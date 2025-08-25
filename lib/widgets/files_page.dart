@@ -182,7 +182,7 @@ class _FilesPageState extends State<FilesPage> {
           CategoryFile(
             iconPath: "assets/icons/photos.svg",
             title: 'Photos',
-            count: 0,
+            count: 1,
             onTap: () {
               Navigator.pushNamed(context, '/photos');
             },
@@ -190,7 +190,7 @@ class _FilesPageState extends State<FilesPage> {
           CategoryFile(
             iconPath: "assets/icons/videos.svg",
             title: 'Videos',
-            count: 0,
+            count: 1,
             onTap: () {
               Navigator.pushNamed(context, '/videos');
             },
@@ -214,7 +214,7 @@ class _FilesPageState extends State<FilesPage> {
           CategoryFile(
             iconPath: "assets/icons/audios.svg",
             title: 'Audios',
-            count: 0,
+            count: 2,
             onTap: () {
               Navigator.pushNamed(context, '/audios');
             },

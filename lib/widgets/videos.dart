@@ -2,19 +2,92 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:secret_box/widgets/check_option_section.dart';
 import 'package:secret_box/widgets/custom_bottom_navbar.dart';
-import 'package:secret_box/widgets/files_page.dart';
 import 'package:secret_box/widgets/notifications_page.dart';
 import 'package:secret_box/widgets/settings_page.dart';
+import 'package:secret_box/widgets/show_confirm_sheet.dart';
 import 'package:secret_box/widgets/upload_options_bottom_sheet.dart';
+import 'package:secret_box/widgets/video_detail_page.dart';
 
 class Videos extends StatefulWidget {
   const Videos({super.key});
 
   @override
-  State<Videos> createState() => _FilesPageState();
+  State<Videos> createState() => _VideosPageState();
 }
 
-class _FilesPageState extends State<Videos> {
+class _VideosPageState extends State<Videos> {
+  static const blue = Color(0xFF3859C5);
+
+  bool selectionMode = false;
+  final Set<int> selected = {};
+
+  final videos = const [
+    {
+      'title': 'Travel Vlog',
+      'date': '02/11/23',
+      'size': '15 MB',
+      'path': 'assets/videos/video1.mp4',
+    },
+  ];
+
+  bool get _allSelected =>
+      selected.length == videos.length && videos.isNotEmpty;
+
+  void _toggleSelectionMode() {
+    setState(() {
+      selectionMode = !selectionMode;
+      selected.clear();
+    });
+  }
+
+  void _toggleSelect(int i, bool value) {
+    setState(() {
+      if (value) {
+        selected.add(i);
+      } else {
+        selected.remove(i);
+      }
+    });
+  }
+
+  void _selectAll() {
+    setState(() {
+      selected
+        ..clear()
+        ..addAll(List.generate(videos.length, (i) => i));
+    });
+  }
+
+  void _clearSelection() {
+    setState(selected.clear);
+  }
+
+  Future<void> _bulkRestore() async {
+    if (selected.isEmpty) return;
+    final ok = await showConfirmSheet(
+      context,
+      ext: 'video',
+      action: FileAction.restore,
+    );
+    if (!mounted) return;
+    if (ok == true) {
+      _clearSelection();
+    }
+  }
+
+  Future<void> _bulkDelete() async {
+    if (selected.isEmpty) return;
+    final ok = await showConfirmSheet(
+      context,
+      ext: 'video',
+      action: FileAction.delete,
+    );
+    if (!mounted) return;
+    if (ok == true) {
+      _clearSelection();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +97,7 @@ class _FilesPageState extends State<Videos> {
         elevation: 0,
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
-        toolbarHeight: 164,
+        toolbarHeight: 120,
         titleSpacing: 10,
         scrolledUnderElevation: 0,
         title: Container(
@@ -34,12 +107,11 @@ class _FilesPageState extends State<Videos> {
               IconButton(
                 icon: const Icon(
                   Icons.arrow_back_ios_new_rounded,
-                  color: Color(0xFF3859C5),
+                  color: blue,
                   size: 15,
                 ),
                 onPressed: () => Navigator.pop(context),
               ),
-
               const Expanded(
                 child: Text(
                   "Videos",
@@ -49,7 +121,7 @@ class _FilesPageState extends State<Videos> {
                     fontSize: 20,
                     fontFamily: "Gilroy",
                     fontWeight: FontWeight.w800,
-                    color: Color(0xFF3859C5),
+                    color: blue,
                   ),
                 ),
               ),
@@ -67,12 +139,7 @@ class _FilesPageState extends State<Videos> {
                     height: 18,
                     width: 18,
                   ),
-                  onPressed: () { Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const FilesPage(),
-                      ),
-                    );},
+                  onPressed: _toggleSelectionMode,
                 ),
                 IconButton(
                   icon: SvgPicture.asset(
@@ -94,7 +161,7 @@ class _FilesPageState extends State<Videos> {
                     "assets/icons/settings.svg",
                     height: 21,
                     width: 21,
-                    color: const Color(0xFF3859C5),
+                    color: blue,
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -109,17 +176,17 @@ class _FilesPageState extends State<Videos> {
             ),
           ),
         ],
+      ),
 
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(10),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(30, 0, 16, 12),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(30, 10, 16, 12),
             child: Row(
               children: [
                 Expanded(
                   child: SizedBox(
                     height: 50,
-                    width: 272,
                     child: TextField(
                       textInputAction: TextInputAction.search,
                       decoration: InputDecoration(
@@ -127,7 +194,7 @@ class _FilesPageState extends State<Videos> {
                         hintStyle: const TextStyle(color: Color(0xFF97A1B5)),
                         suffixIcon: const Icon(
                           Icons.search,
-                          color: Color(0xFF3859C5),
+                          color: blue,
                           size: 25,
                         ),
                         contentPadding: const EdgeInsets.symmetric(
@@ -135,10 +202,7 @@ class _FilesPageState extends State<Videos> {
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(
-                            color: Color(0xFF3859C5),
-                            width: 2,
-                          ),
+                          borderSide: const BorderSide(color: blue, width: 2),
                         ),
                       ),
                     ),
@@ -151,7 +215,7 @@ class _FilesPageState extends State<Videos> {
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF3859C5),
+                      backgroundColor: blue,
                       padding: EdgeInsets.zero,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15),
@@ -170,7 +234,7 @@ class _FilesPageState extends State<Videos> {
                           isScrollControlled: true,
                           backgroundColor: Colors.transparent,
                           builder: (context) => Material(
-                            borderRadius: BorderRadius.vertical(
+                            borderRadius: const BorderRadius.vertical(
                               top: Radius.circular(24),
                             ),
                             clipBehavior: Clip.antiAlias,
@@ -184,16 +248,174 @@ class _FilesPageState extends State<Videos> {
               ],
             ),
           ),
-        ),
+
+          if (selectionMode)
+            Container(
+              height: 40,
+              width: 320,
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+              decoration: BoxDecoration(
+                color: blue.withOpacity(0.6),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                children: [
+                  TextButton(
+                    onPressed: _allSelected ? _clearSelection : _selectAll,
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      minimumSize: Size.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    child: Text(
+                      _allSelected ? 'Deselect All' : 'Select All',
+                      style: const TextStyle(
+                        fontFamily: 'Gilroy',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 1,
+                    height: 16,
+                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                    color: Colors.white.withOpacity(0.6),
+                  ),
+                  TextButton(
+                    onPressed: selected.isEmpty ? null : _bulkRestore,
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      minimumSize: Size.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    child: Row(
+                      children: const [
+                        Text(
+                          'Restore',
+                          style: TextStyle(
+                            fontFamily: 'Gilroy',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(width: 4),
+                        Icon(Icons.restore, size: 16, color: Colors.white),
+                      ],
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: selected.isEmpty ? null : _bulkDelete,
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      minimumSize: Size.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    child: Row(
+                      children: const [
+                        Text(
+                          'Delete',
+                          style: TextStyle(
+                            fontFamily: 'Gilroy',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(width: 4),
+                        Icon(
+                          Icons.delete_outline,
+                          size: 16,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: videos.length,
+              itemBuilder: (context, i) {
+                final v = videos[i];
+                final isSelected = selected.contains(i);
+
+                return GestureDetector(
+                  onTap: () {
+                    if (selectionMode) {
+                      _toggleSelect(i, !isSelected);
+                      return;
+                    }
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => VideoDetailPage(
+                          title: v['title']!,
+                          path: v['path']!,
+                          onRestore: () {},
+                          onDelete: () {},
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 12),
+                    child: ListTile(
+                      leading: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Image.asset(
+                              v['path']!,
+                              width: 68,
+                              height: 62,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          const Icon(
+                            Icons.play_circle_fill,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ],
+                      ),
+                      title: Text(
+                        v['title']!,
+                        style: const TextStyle(
+                          fontFamily: 'Gilroy',
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [Text(v['date']!), Text(v['size']!)],
+                      ),
+                      trailing: selectionMode
+                          ? Checkbox(
+                              value: isSelected,
+                              activeColor: blue,
+                              shape: const CircleBorder(),
+                              onChanged: (v) => _toggleSelect(i, v ?? false),
+                            )
+                          : null,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
 
-      body: Center(
-        child: Text(
-          'Tap the  +  button to importyour documents.',
-          style: TextStyle(color: Color(0xFF777777).withOpacity(0.7),fontSize: 20,
-          fontWeight: FontWeight.w400,fontFamily: 'Gilroy'),
-        ),
-      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: SizedBox(
         width: 53,
@@ -208,7 +430,7 @@ class _FilesPageState extends State<Videos> {
               builder: (_) => const UploadOptionsBottomSheet(),
             );
           },
-          backgroundColor: const Color(0xFF3859C5),
+          backgroundColor: blue,
           shape: const CircleBorder(),
           elevation: 0,
           child: SvgPicture.asset('assets/icons/add_floating_button.svg'),
