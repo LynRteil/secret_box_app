@@ -4,7 +4,7 @@ import 'package:secret_box/widgets/show_confirm_sheet.dart';
 
 class VideoDetailPage extends StatefulWidget {
   final String title;
-  final String path;                 
+  final String path;
   final VoidCallback onRestore;
   final VoidCallback onDelete;
 
@@ -115,8 +115,11 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                   IconButton(
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
-                    icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                        size: 12, color: blue),
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      size: 12,
+                      color: blue,
+                    ),
                     onPressed: () => Navigator.pop(context),
                   ),
                   Expanded(
@@ -140,56 +143,47 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                   child: Center(
                     child: GestureDetector(
                       onTap: _togglePlay,
-                      child: _initialized
-                          ? Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                AspectRatio(
-                                  aspectRatio: _controller.value.aspectRatio,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.55,
+                        width: MediaQuery.of(context).size.width - 24,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              if (_initialized)
+                                FittedBox(
+                                  fit: BoxFit.cover,
+                                  child: SizedBox(
+                                    width: _controller.value.size.width,
+                                    height: _controller.value.size.height,
                                     child: VideoPlayer(_controller),
                                   ),
-                                ),
+                                )
+                              else
+                                Container(color: Colors.black12),
 
-                                if (!_controller.value.isPlaying)
-                                  Container(
-                                    width: 68,
-                                    height: 68,
-                                    decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.35),
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: const Icon(Icons.play_arrow,
-                                        color: Colors.white, size: 42),
-                                  ),
-
-                                if (durationLabel.isNotEmpty)
-                                  _durationBadge(label: durationLabel),
-                              ],
-                            )
-                          : Stack(
-                              alignment: Alignment.center,
-                              children: [
+                              if (!_initialized || !_controller.value.isPlaying)
                                 Container(
-                                  width: 300,
-                                  height: 500,
-                                  color: Colors.black12,
-                                ),
-                                Container(
-                                  width: 68,
-                                  height: 68,
+                                  width: 78,
+                                  height: 78,
                                   decoration: BoxDecoration(
                                     color: Colors.black.withOpacity(0.35),
                                     shape: BoxShape.circle,
                                   ),
-                                  child: const Icon(Icons.play_arrow,
-                                      color: Colors.white, size: 42),
+                                  child: const Icon(
+                                    Icons.play_arrow,
+                                    color: Colors.white,
+                                    size: 46,
+                                  ),
                                 ),
-                                if (durationLabel.isNotEmpty)
-                                  _durationBadge(label: durationLabel),
-                              ],
-                            ),
+
+                              if (durationLabel.isNotEmpty)
+                                _durationBadge(label: durationLabel),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -201,7 +195,9 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                     child: Container(
                       width: 330,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 8),
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
                       decoration: BoxDecoration(
                         color: blue.withOpacity(0.6),
                         borderRadius: BorderRadius.circular(15),
@@ -211,7 +207,9 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                           Expanded(
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 6),
+                                horizontal: 12,
+                                vertical: 6,
+                              ),
                               child: Text(
                                 widget.title,
                                 maxLines: 1,
@@ -242,8 +240,9 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                             },
                             style: TextButton.styleFrom(
                               foregroundColor: Colors.white,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 6),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                              ),
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                               minimumSize: Size.zero,
                             ),
@@ -274,8 +273,9 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                             },
                             style: TextButton.styleFrom(
                               foregroundColor: Colors.white,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 6),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                              ),
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                               minimumSize: Size.zero,
                             ),

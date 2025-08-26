@@ -171,7 +171,8 @@ class _SetNewPasswordState extends State<SetNewPassword> {
               width: 330,
               child: ElevatedButton(
                 onPressed: is_filled ? () {
-                  Navigator.pushNamed(context, '/securitypin');
+                 Navigator.pushReplacementNamed(context, '/securitypin');
+
                 } : null,
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.resolveWith<Color>((

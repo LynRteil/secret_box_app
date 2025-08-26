@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:secret_box/widgets/custom_bottom_navbar.dart';
 import 'package:secret_box/widgets/custom_circular_indicator.dart';
+import 'package:secret_box/widgets/media_selection_sheet.dart';
 import 'package:secret_box/widgets/notifications_page.dart';
 import 'package:secret_box/widgets/settings_page.dart';
 import 'package:secret_box/widgets/storage_category_tile.dart';
@@ -157,7 +158,14 @@ class CloudPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          builder: (context) => const MediaSelectionSheet(action: "Backup"),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF3859C5),
                         minimumSize: const Size(135, 48),
@@ -173,7 +181,14 @@ class CloudPage extends StatelessWidget {
                     ),
 
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          builder: (context) => const MediaSelectionSheet(action: "Restore"),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF3859C5),
                         minimumSize: const Size(135, 48),

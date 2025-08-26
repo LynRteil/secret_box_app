@@ -7,6 +7,7 @@ import 'package:secret_box/widgets/settings_page.dart';
 import 'package:secret_box/widgets/show_confirm_sheet.dart';
 import 'package:secret_box/widgets/upload_options_bottom_sheet.dart';
 import 'package:secret_box/widgets/video_detail_page.dart';
+import 'package:secret_box/widgets/video_list_preview.dart';
 
 class Videos extends StatefulWidget {
   const Videos({super.key});
@@ -369,25 +370,9 @@ class _VideosPageState extends State<Videos> {
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 12),
                     child: ListTile(
-                      leading: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(5),
-                            child: Image.asset(
-                              v['path']!,
-                              width: 68,
-                              height: 62,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          const Icon(
-                            Icons.play_circle_fill,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        ],
-                      ),
+                      leading: const VideoListPreview(path: 'assets/videos/video1.mp4', width: 62, height: 68),
+
+
                       title: Text(
                         v['title']!,
                         style: const TextStyle(
