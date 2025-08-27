@@ -26,12 +26,20 @@ class UploadOptionsBottomSheet extends StatelessWidget {
           showPictureSheet(ctx);
         },
       ),
-      OptionItem("Upload Contacts", "assets/icons/contacts.svg", onPressed: (ctx) {
+      OptionItem(
+        "Upload Contacts",
+        "assets/icons/contacts.svg",
+        onPressed: (ctx) {
           showImportContactsSheet(ctx);
-        },),
-      OptionItem("Upload Music/Audios", "assets/icons/audios.svg", onPressed: (ctx) {
+        },
+      ),
+      OptionItem(
+        "Upload Music/Audios",
+        "assets/icons/audios.svg",
+        onPressed: (ctx) {
           showDocumentPicker(ctx);
-        },),
+        },
+      ),
       OptionItem(
         "Create Folder",
         "assets/icons/folders.svg",
@@ -45,7 +53,7 @@ class UploadOptionsBottomSheet extends StatelessWidget {
       height: 390,
       decoration: const BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
+      
       ),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       child: Wrap(
@@ -64,23 +72,18 @@ class UploadOptionsBottomSheet extends StatelessWidget {
                     color: Color(0xFF898989),
                   ),
                 ),
-              // inside UploadOptionsBottomSheet build():
-onTap: () {
-  // Grab the root navigator + its context (safe, not tied to this sheet)
-  final rootNav = Navigator.of(context, rootNavigator: true);
-  final rootCtx = rootNav.context;
+                onTap: () {
+                  final rootNav = Navigator.of(context, rootNavigator: true);
+                  final rootCtx = rootNav.context;
 
-  // Close this sheet first
-  rootNav.pop();
+                  rootNav.pop();
 
-  // Then open the next sheet on the next microtask using the root context
-  Future.microtask(() {
-    if (rootCtx.mounted && item.onPressed != null) {
-      item.onPressed!(rootCtx);
-    }
-  });
-},
-
+                  Future.microtask(() {
+                    if (rootCtx.mounted && item.onPressed != null) {
+                      item.onPressed!(rootCtx);
+                    }
+                  });
+                },
               ),
               if (item != options.last)
                 const Divider(

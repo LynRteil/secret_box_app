@@ -14,7 +14,7 @@ Future<void> showDocumentPicker(BuildContext parentContext) {
         height: height * 0.85,
         decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        
         ),
         child: Column(
           children: [
@@ -103,7 +103,7 @@ Future<void> showDocumentPicker(BuildContext parentContext) {
 
                       Flexible(
                         child: Column(
-                            mainAxisSize: MainAxisSize.min,
+                          mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
                             Text(
@@ -134,33 +134,35 @@ Future<void> showDocumentPicker(BuildContext parentContext) {
                 },
               ),
             ),
-          
-            Container(
-              decoration: const BoxDecoration(
-                border: Border(
-                  top: BorderSide(color: Colors.black12, width: 1),
+            SafeArea(
+              top: false,
+              child: Container(
+                decoration: const BoxDecoration(
+                  border: Border(
+                    top: BorderSide(color: Colors.black12, width: 1),
+                  ),
                 ),
-              ),
-              child: BottomNavigationBar(
-                items: const [
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.access_time),
-                    label: "Recents",
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.share),
-                    label: "Shared",
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.folder),
-                    label: "Browse",
-                  ),
-                ],
-                currentIndex: 0,
-                selectedItemColor: blue,
-                unselectedItemColor: Colors.grey,
-                elevation: 0,
-                backgroundColor: Colors.white,
+                child: BottomNavigationBar(
+                  items: const [
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.access_time),
+                      label: "Recents",
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.share),
+                      label: "Shared",
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.folder),
+                      label: "Browse",
+                    ),
+                  ],
+                  currentIndex: 0,
+                  selectedItemColor: blue,
+                  unselectedItemColor: Colors.grey,
+                  elevation: 0,
+                  backgroundColor: Colors.white,
+                ),
               ),
             ),
           ],

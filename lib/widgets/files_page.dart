@@ -158,9 +158,7 @@ class _FilesPageState extends State<FilesPage> {
                           isScrollControlled: true,
                           backgroundColor: Colors.transparent,
                           builder: (context) => Material(
-                            borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(24),
-                            ),
+                            
                             clipBehavior: Clip.antiAlias,
                             child: CheckOptionSection(onDone: (selected) {}),
                           ),
@@ -205,7 +203,7 @@ class _FilesPageState extends State<FilesPage> {
           CategoryFile(
             iconPath: "assets/icons/contacts.svg",
             title: 'Contacts',
-            count: 0,
+            count: 3,
             onTap: () {
               Navigator.pushNamed(context, '/contacts');
             },

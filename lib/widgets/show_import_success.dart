@@ -12,7 +12,7 @@ Future<void> showImportSuccess(BuildContext context) {
         padding: const EdgeInsets.all(20),
         decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+     
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
