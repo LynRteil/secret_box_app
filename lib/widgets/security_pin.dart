@@ -195,7 +195,9 @@ class _SecurityPinState extends State<SecurityPin> {
                           const SizedBox(width: 45),
                           IconKey(
                             icon: Icons.arrow_forward_rounded,
-                            onTap: () => _onKeyTap('submit'),
+                            onTap: () {
+                              Navigator.pushNamed(context, '/files');
+                            },
                           ),
                         ],
                       ),

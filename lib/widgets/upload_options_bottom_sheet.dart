@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:secret_box/models/option_item.dart';
+import 'package:secret_box/widgets/show_document_picker.dart';
+import 'package:secret_box/widgets/show_import_contacts_sheet.dart';
+import 'package:secret_box/widgets/show_modal_bottom_sheet.dart';
+import 'package:secret_box/widgets/show_picture_sheet.dart';
 
 class UploadOptionsBottomSheet extends StatelessWidget {
   const UploadOptionsBottomSheet({super.key});
@@ -8,12 +12,33 @@ class UploadOptionsBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<OptionItem> options = [
-      OptionItem("Upload Documents", "assets/icons/documents.svg"),
-      OptionItem("Upload Photos/Videos", "assets/icons/videos.svg"),
-      OptionItem("Upload Contacts", "assets/icons/contacts.svg"),
-      OptionItem("Upload Music/Audios", "assets/icons/audios.svg"),
-      OptionItem("Create Folder", "assets/icons/folders.svg"),
-      
+      OptionItem(
+        "Upload Documents",
+        "assets/icons/documents.svg",
+        onPressed: (ctx) {
+          showDocumentPicker(ctx);
+        },
+      ),
+      OptionItem(
+        "Upload Photos/Videos",
+        "assets/icons/videos.svg",
+        onPressed: (ctx) {
+          showPictureSheet(ctx);
+        },
+      ),
+      OptionItem("Upload Contacts", "assets/icons/contacts.svg", onPressed: (ctx) {
+          showImportContactsSheet(ctx);
+        },),
+      OptionItem("Upload Music/Audios", "assets/icons/audios.svg", onPressed: (ctx) {
+          showDocumentPicker(ctx);
+        },),
+      OptionItem(
+        "Create Folder",
+        "assets/icons/folders.svg",
+        onPressed: (ctx) {
+          showCreateFolderSheet(ctx);
+        },
+      ),
     ];
 
     return Container(
@@ -39,9 +64,23 @@ class UploadOptionsBottomSheet extends StatelessWidget {
                     color: Color(0xFF898989),
                   ),
                 ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
+              // inside UploadOptionsBottomSheet build():
+onTap: () {
+  // Grab the root navigator + its context (safe, not tied to this sheet)
+  final rootNav = Navigator.of(context, rootNavigator: true);
+  final rootCtx = rootNav.context;
+
+  // Close this sheet first
+  rootNav.pop();
+
+  // Then open the next sheet on the next microtask using the root context
+  Future.microtask(() {
+    if (rootCtx.mounted && item.onPressed != null) {
+      item.onPressed!(rootCtx);
+    }
+  });
+},
+
               ),
               if (item != options.last)
                 const Divider(
@@ -49,12 +88,10 @@ class UploadOptionsBottomSheet extends StatelessWidget {
                   thickness: 1,
                   height: 1,
                 ),
-             
-               
             ],
           ),
           //check this
-         const SizedBox(height: 36),
+          const SizedBox(height: 36),
           Center(
             child: SizedBox(
               width: 330,
@@ -71,7 +108,7 @@ class UploadOptionsBottomSheet extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                
+
                 child: Text(
                   "Cancel",
                   style: TextStyle(
@@ -89,5 +126,3 @@ class UploadOptionsBottomSheet extends StatelessWidget {
     );
   }
 }
-
-
