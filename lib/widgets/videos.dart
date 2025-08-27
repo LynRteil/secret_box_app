@@ -205,6 +205,13 @@ class _VideosPageState extends State<Videos> {
                           borderRadius: BorderRadius.circular(15),
                           borderSide: const BorderSide(color: blue, width: 2),
                         ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(
+                            color: Color(0xFF3859C5),
+                            width: 2,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -370,8 +377,11 @@ class _VideosPageState extends State<Videos> {
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 12),
                     child: ListTile(
-                      leading: const VideoListPreview(path: 'assets/videos/video1.mp4', width: 62, height: 68),
-
+                      leading: const VideoListPreview(
+                        path: 'assets/videos/video1.mp4',
+                        width: 62,
+                        height: 68,
+                      ),
 
                       title: Text(
                         v['title']!,

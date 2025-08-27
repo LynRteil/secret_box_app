@@ -204,6 +204,13 @@ class _PhotosPageState extends State<Photos> {
                           borderRadius: BorderRadius.circular(15),
                           borderSide: const BorderSide(color: blue, width: 2),
                         ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(
+                            color: Color(0xFF3859C5),
+                            width: 2,
+                          ),
+                        ),
                       ),
                     ),
                   ),

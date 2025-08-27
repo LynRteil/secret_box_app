@@ -17,7 +17,7 @@ class _SecretWebPageState extends State<SecretWebPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-         backgroundColor: Colors.white,
+      backgroundColor: Colors.white,
       extendBody: true,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -51,7 +51,7 @@ class _SecretWebPageState extends State<SecretWebPage> {
                     width: 21,
                   ),
                   onPressed: () {
-                        Navigator.push(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const NotificationsPage(),
@@ -67,7 +67,7 @@ class _SecretWebPageState extends State<SecretWebPage> {
                     color: Colors.white,
                   ),
                   onPressed: () {
-                      Navigator.push(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const SettingsPage(),
@@ -109,6 +109,13 @@ class _SecretWebPageState extends State<SecretWebPage> {
                             width: 2,
                           ),
                         ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(
+                            color: Colors.white,
+                            width: 2,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -139,7 +146,7 @@ class _SecretWebPageState extends State<SecretWebPage> {
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             elevation: 3,
           ),
-          child:  Row(
+          child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(

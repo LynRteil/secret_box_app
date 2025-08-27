@@ -67,12 +67,14 @@ class _FilesPageState extends State<Contacts> {
                     height: 18,
                     width: 18,
                   ),
-                  onPressed: () { Navigator.push(
+                  onPressed: () {
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const FilesPage(),
                       ),
-                    );},
+                    );
+                  },
                 ),
                 IconButton(
                   icon: SvgPicture.asset(
@@ -140,6 +142,13 @@ class _FilesPageState extends State<Contacts> {
                             width: 2,
                           ),
                         ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(
+                            color: Color(0xFF3859C5),
+                            width: 2,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -190,8 +199,12 @@ class _FilesPageState extends State<Contacts> {
       body: Center(
         child: Text(
           'Tap the  +  button to importyour documents.',
-          style: TextStyle(color: Color(0xFF777777).withOpacity(0.7),fontSize: 20,
-          fontWeight: FontWeight.w400,fontFamily: 'Gilroy'),
+          style: TextStyle(
+            color: Color(0xFF777777).withOpacity(0.7),
+            fontSize: 20,
+            fontWeight: FontWeight.w400,
+            fontFamily: 'Gilroy',
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,

@@ -121,6 +121,13 @@ class _FilesPageState extends State<FilesPage> {
                             width: 2,
                           ),
                         ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(
+                            color: Color(0xFF3859C5),
+                            width: 2,
+                          ),
+                        ),
                       ),
                     ),
                   ),

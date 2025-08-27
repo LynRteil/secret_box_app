@@ -43,7 +43,7 @@ class _FilesPageState extends State<Documents> {
               const Expanded(
                 child: Text(
                   "Documents",
-                 overflow: TextOverflow.ellipsis,
+                  overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: TextStyle(
                     fontSize: 20,
@@ -68,12 +68,14 @@ class _FilesPageState extends State<Documents> {
                     height: 18,
                     width: 18,
                   ),
-                  onPressed: () { Navigator.push(
+                  onPressed: () {
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const FilesPage(),
                       ),
-                    );},
+                    );
+                  },
                 ),
                 IconButton(
                   icon: SvgPicture.asset(
@@ -135,6 +137,13 @@ class _FilesPageState extends State<Documents> {
                           horizontal: 20,
                         ),
                         enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(
+                            color: Color(0xFF3859C5),
+                            width: 2,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide: const BorderSide(
                             color: Color(0xFF3859C5),

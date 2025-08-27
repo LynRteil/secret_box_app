@@ -1,4 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:secret_box/firebase_options.dart';
 import 'package:secret_box/widgets/audios.dart';
 import 'package:secret_box/widgets/authScreen.dart';
 import 'package:secret_box/widgets/check_email.dart';
@@ -19,7 +21,11 @@ import 'package:secret_box/widgets/set_new_password.dart';
 import 'package:secret_box/widgets/sign_up.dart';
 import 'package:secret_box/widgets/videos.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
