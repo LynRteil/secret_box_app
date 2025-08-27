@@ -16,7 +16,7 @@ Future<void> showPictureSheet(BuildContext context) {
             height: height * 0.8,
             decoration: const BoxDecoration(
               color: Colors.white,
-      
+          borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
             ),
             child: Column(
               children: [

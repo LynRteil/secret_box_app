@@ -7,19 +7,16 @@ Future<void> showDocumentPicker(BuildContext parentContext) {
     isScrollControlled: true,
     backgroundColor: Colors.transparent,
     builder: (sheetCtx) {
-      final height = MediaQuery.of(sheetCtx).size.height;
       const blue = Color(0xFF3859C5);
+      final height = MediaQuery.of(sheetCtx).size.height;
 
       return Container(
         height: height * 0.85,
-        decoration: const BoxDecoration(
-          color: Colors.white,
-        
-        ),
+        color: Colors.white,
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(right: 50, top: 12),
+              padding: const EdgeInsets.only(right: 15, top: 12),
               child: Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
@@ -33,19 +30,18 @@ Future<void> showDocumentPicker(BuildContext parentContext) {
                     "Import",
                     style: TextStyle(
                       color: blue,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Color(0xFFF2F2F2),
+                  color: const Color(0xFFF2F2F2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const TextField(
@@ -54,32 +50,37 @@ Future<void> showDocumentPicker(BuildContext parentContext) {
                     hintStyle: TextStyle(color: Color(0xFF777777)),
                     prefixIcon: Icon(Icons.search, color: Color(0xFF777777)),
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(
-                      vertical: 14,
-                      horizontal: 12,
-                    ),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 14, horizontal: 12),
                   ),
                 ),
               ),
             ),
-
             Expanded(
               child: GridView.builder(
                 padding: const EdgeInsets.all(16),
-                itemCount: 9,
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 142,
-                  mainAxisSpacing: 20,
+                itemCount: 12,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
                   crossAxisSpacing: 20,
-                  childAspectRatio: 0.7,
+                  mainAxisSpacing: 20,
+                  childAspectRatio: 0.60, // <- taller cells, fixes ~6px overflow
                 ),
                 itemBuilder: (ctx, index) {
+                  final ext = (index % 4 == 0)
+                      ? ".pdf"
+                      : (index % 4 == 1)
+                          ? ".ppt"
+                          : (index % 4 == 2)
+                              ? ".mp3"
+                              : ".zip";
+
                   return Column(
-                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
                         height: 90,
-                        width: 70,
+                        width: 60,
                         decoration: BoxDecoration(
                           color: blue,
                           borderRadius: BorderRadius.circular(10),
@@ -89,7 +90,7 @@ Future<void> showDocumentPicker(BuildContext parentContext) {
                           child: Padding(
                             padding: const EdgeInsets.all(4),
                             child: Text(
-                              index % 2 == 0 ? ".pdf" : ".ppt",
+                              ext,
                               style: const TextStyle(
                                 fontWeight: FontWeight.w800,
                                 color: Colors.white,
@@ -100,34 +101,21 @@ Future<void> showDocumentPicker(BuildContext parentContext) {
                         ),
                       ),
                       const SizedBox(height: 6),
-
-                      Flexible(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
-                              "Lorem",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(fontWeight: FontWeight.w600),
-                            ),
-                            Text(
-                              "20/02/2023",
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            Text(
-                              "iCloud Drive",
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ],
-                        ),
+                      const Text(
+                        "Lorem",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(height: 2),
+                      const Text(
+                        "20/02/2023",
+                        style: TextStyle(fontSize: 12, color: Colors.grey),
+                      ),
+                      const SizedBox(height: 2),
+                      const Text(
+                        "iCloud Drive",
+                        style: TextStyle(fontSize: 12, color: Colors.grey),
                       ),
                     ],
                   );

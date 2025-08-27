@@ -31,12 +31,23 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
+        
         child: Column(
+          
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(12, 16, 12, 8),
+            Container(
+             
+               margin: const EdgeInsets.fromLTRB(0, 48, 15, 15),
               child: Row(
                 children: [
+                   IconButton(
+                icon: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: blue,
+                  size: 15,
+                ),
+                onPressed: () => Navigator.pop(context),
+              ),
                   Expanded(
                     child: Text(
                       widget.name,
@@ -54,6 +65,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
             ),
 
             const SizedBox(height: 12),
+            Column(children: [
             CircleAvatar(
               radius: 36,
               backgroundColor: blue,
@@ -98,6 +110,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                 fontWeight: FontWeight.w400,
               ),
             ),
+            ],),
             const SizedBox(height: 20),
 
             Expanded(

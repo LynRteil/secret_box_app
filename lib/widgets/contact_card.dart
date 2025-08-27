@@ -42,17 +42,12 @@ class ContactCard extends StatelessWidget {
         if (selectionMode) {
           onSelectedChanged?.call(!selected);
         } else {
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (_) => ContactDetailPage(
-        name: name,
-        phone: phone,
-      ),
-    ),
-  );
-
-
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => ContactDetailPage(name: name, phone: phone),
+            ),
+          );
         }
       },
       borderRadius: BorderRadius.circular(12),
@@ -68,23 +63,28 @@ class ContactCard extends StatelessWidget {
                 color: blue,
                 borderRadius: BorderRadius.circular(5),
               ),
-              alignment: Alignment.center,
-              child: Text(
-                _initials(name),
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 14,
+              child: Align(
+                alignment: Alignment.topRight,
+                child: Padding(
+                  padding: const EdgeInsets.all(4),
+                  child: Text(
+                    _initials(name),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 14,
+                    ),
+                  ),
                 ),
               ),
             ),
+
             const SizedBox(width: 12),
 
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-              
                   Text(
                     name,
                     maxLines: 1,
@@ -131,7 +131,10 @@ class ContactCard extends StatelessWidget {
                 activeColor: blue,
                 shape: const CircleBorder(),
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                visualDensity: const VisualDensity(horizontal: -2, vertical: -2),
+                visualDensity: const VisualDensity(
+                  horizontal: -2,
+                  vertical: -2,
+                ),
               ),
           ],
         ),

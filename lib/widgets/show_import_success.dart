@@ -15,6 +15,7 @@ Future<void> showImportSuccess(BuildContext context) {
      
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             const SizedBox(height: 12),
@@ -22,17 +23,18 @@ Future<void> showImportSuccess(BuildContext context) {
               "Successfully Imported !",
               style: TextStyle(
                 color: blue,
-                fontSize: 18,
+                fontSize: 24,
                 fontWeight: FontWeight.w800,
               ),
             ),
             const SizedBox(height: 6),
-            const Text(
+             Text(
               "Do you want to delete the original files\nfrom Files ?",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey,
+                fontSize: 15,
+                color: blue.withOpacity(0.7),
+                fontWeight: FontWeight.w400,
               ),
             ),
             const SizedBox(height: 20),
@@ -44,14 +46,14 @@ Future<void> showImportSuccess(BuildContext context) {
                       Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey.shade300,
-                      foregroundColor: Colors.black,
+                      backgroundColor: Color(0XFFC8C8C8),
+                      foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(15),
                       ),
                     ),
-                    child: const Text("Delete"),
+                    child: const Text("Delete",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -65,10 +67,10 @@ Future<void> showImportSuccess(BuildContext context) {
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(15),
                       ),
                     ),
-                    child: const Text("Keep"),
+                    child: const Text("Keep",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400),),
                   ),
                 ),
               ],
