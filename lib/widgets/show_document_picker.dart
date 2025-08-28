@@ -64,7 +64,7 @@ Future<void> showDocumentPicker(BuildContext parentContext) {
                   crossAxisCount: 3,
                   crossAxisSpacing: 20,
                   mainAxisSpacing: 20,
-                  childAspectRatio: 0.60, // <- taller cells, fixes ~6px overflow
+                  childAspectRatio: 0.60, 
                 ),
                 itemBuilder: (ctx, index) {
                   final ext = (index % 4 == 0)
