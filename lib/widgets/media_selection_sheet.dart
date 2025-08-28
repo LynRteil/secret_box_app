@@ -43,7 +43,7 @@ class _MediaSelectionSheetState extends State<MediaSelectionSheet> {
       padding: const EdgeInsets.all(20),
       decoration: const BoxDecoration(
         color: Color(0xFF3859C5),
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
