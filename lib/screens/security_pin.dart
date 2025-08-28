@@ -196,7 +196,7 @@ class _SecurityPinState extends State<SecurityPin> {
                           IconKey(
                             icon: Icons.arrow_forward_rounded,
                             onTap: () {
-                              Navigator.pushNamed(context, '/files');
+                              Navigator.pushNamed(context, '/setDashboard');
                             },
                           ),
                         ],

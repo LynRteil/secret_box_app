@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
         '/forgot-password':(context)=>const ForgotPassword(),
         '/checkemail':(context)=>const CheckEmail(),
         '/setnewpassword':(context)=>const SetNewPassword(),
-        '/setDasboard':(context)=>const Dashboard(),
+        '/setDashboard':(context)=>const Dashboard(),
         
       },
     );

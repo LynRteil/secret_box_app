@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:secret_box/screens/dashboard.dart';
 import 'package:secret_box/widgets/check_option_section.dart';
 import 'package:secret_box/widgets/custom_bottom_navbar.dart';
 import 'package:secret_box/screens/files_page.dart';
@@ -227,8 +228,16 @@ class _FilesPageState extends State<Music> {
           child: SvgPicture.asset('assets/icons/add_floating_button.svg'),
         ),
       ),
-
-      bottomNavigationBar: const CustomBottomNavBar(),
+bottomNavigationBar: CustomBottomNavBar(
+  currentIndex: 0, 
+  onTap: (i) {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (_) => Dashboard(initialIndex: i)),
+      (route) => false,
+    );
+  },
+),
     );
   }
 }

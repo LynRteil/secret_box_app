@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:secret_box/widgets/custom_bottom_navbar.dart';
 import 'package:secret_box/widgets/custom_circular_indicator.dart';
 import 'package:secret_box/widgets/media_selection_sheet.dart';
 import 'package:secret_box/screens/notifications_page.dart';
@@ -273,7 +272,6 @@ class CloudPage extends StatelessWidget {
         ],
       ),
 
-      bottomNavigationBar: const CustomBottomNavBar(),
     );
   }
 }

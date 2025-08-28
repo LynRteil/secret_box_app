@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:secret_box/widgets/category_file.dart';
 import 'package:secret_box/widgets/check_option_section.dart';
-import 'package:secret_box/widgets/custom_bottom_navbar.dart';
 import 'package:secret_box/screens/notifications_page.dart';
 import 'package:secret_box/screens/settings_page.dart';
 import 'package:secret_box/widgets/upload_options_bottom_sheet.dart';
@@ -256,7 +255,6 @@ class _FilesPageState extends State<FilesPage> {
         ),
       ),
 
-      bottomNavigationBar: const CustomBottomNavBar(),
     );
   }
 }
