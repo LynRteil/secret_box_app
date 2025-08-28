@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:secret_box/widgets/build_option.dart';
 
 class MediaSelectionSheet extends StatefulWidget {
   final String action;
@@ -69,20 +70,20 @@ class _MediaSelectionSheetState extends State<MediaSelectionSheet> {
           const SizedBox(height: 8),
           Column(
             children: [
-              _buildOption("All", optionStyle, all, _toggleAll),
-              _buildOption("Images", optionStyle, images, (val) {
+              buildOption("All", optionStyle, all, _toggleAll),
+              buildOption("Images", optionStyle, images, (val) {
                 setState(() => images = val ?? false);
               }),
-              _buildOption("Videos", optionStyle, videos, (val) {
+              buildOption("Videos", optionStyle, videos, (val) {
                 setState(() => videos = val ?? false);
               }),
-              _buildOption("Audios", optionStyle, audios, (val) {
+              buildOption("Audios", optionStyle, audios, (val) {
                 setState(() => audios = val ?? false);
               }),
-              _buildOption("Documents", optionStyle, documents, (val) {
+              buildOption("Documents", optionStyle, documents, (val) {
                 setState(() => documents = val ?? false);
               }),
-              _buildOption("Contacts", optionStyle, contacts, (val) {
+              buildOption("Contacts", optionStyle, contacts, (val) {
                 setState(() => contacts = val ?? false);
               }),
             ],
@@ -116,30 +117,6 @@ class _MediaSelectionSheetState extends State<MediaSelectionSheet> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildOption(
-    String title,
-    TextStyle style,
-    bool value,
-    Function(bool?) onChanged,
-  ) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 0),
-      child: CheckboxListTile(
-        value: value,
-        onChanged: onChanged,
-        dense: true,
-        controlAffinity: ListTileControlAffinity.leading,
-        contentPadding: EdgeInsets.zero,
-        activeColor: Colors.transparent,
-        checkColor: Colors.white,
-        side: MaterialStateBorderSide.resolveWith(
-          (states) => const BorderSide(color: Colors.white, width: 1),
-        ),
-        title: Text(title, style: style),
       ),
     );
   }
