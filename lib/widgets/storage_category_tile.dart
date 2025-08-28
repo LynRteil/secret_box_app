@@ -91,9 +91,9 @@ class StorageCategoryTile extends StatelessWidget {
                             color: color,
                             boxShadow: [
                               BoxShadow(
-                                color: color.withOpacity(0.6),
-                                spreadRadius: 2,
-                                blurRadius: 8,
+                                color: color.withOpacity(0.5),
+                                spreadRadius: 1,
+                                blurRadius: 5,
                                 offset: const Offset(0, 0),
                               ),
                             ],
