@@ -70,20 +70,20 @@ class _MediaSelectionSheetState extends State<MediaSelectionSheet> {
           const SizedBox(height: 8),
           Column(
             children: [
-              buildOption("All", optionStyle, all, _toggleAll),
-              buildOption("Images", optionStyle, images, (val) {
+              BuildOption("All", optionStyle, all, _toggleAll),
+              BuildOption("Images", optionStyle, images, (val) {
                 setState(() => images = val ?? false);
               }),
-              buildOption("Videos", optionStyle, videos, (val) {
+              BuildOption("Videos", optionStyle, videos, (val) {
                 setState(() => videos = val ?? false);
               }),
-              buildOption("Audios", optionStyle, audios, (val) {
+              BuildOption("Audios", optionStyle, audios, (val) {
                 setState(() => audios = val ?? false);
               }),
-              buildOption("Documents", optionStyle, documents, (val) {
+              BuildOption("Documents", optionStyle, documents, (val) {
                 setState(() => documents = val ?? false);
               }),
-              buildOption("Contacts", optionStyle, contacts, (val) {
+              BuildOption("Contacts", optionStyle, contacts, (val) {
                 setState(() => contacts = val ?? false);
               }),
             ],

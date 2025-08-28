@@ -21,7 +21,7 @@ Future<void> showFaceIdPopup(
       iconAsset: iconAsset,
       bottom: bottom,
       margin: margin,
-      dimColor: dimColor.withOpacity(dimOpacity),
+      dimColor: dimColor.withValues(alpha:dimOpacity),
       onFinished: () => entry.remove(),
       duration: duration,
     ),

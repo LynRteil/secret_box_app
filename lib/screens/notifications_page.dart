@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:secret_box/widgets/notification_card.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:secret_box/widgets/show_confirm_sheet.dart'; 
+import 'package:secret_box/widgets/confirm_sheet.dart'; 
 
 class NotificationsPage extends StatefulWidget {
   const NotificationsPage({super.key});
@@ -57,8 +57,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
 
   Future<void> _bulkDelete() async {
     if (selected.isEmpty) return;
-    final ok = await showConfirmSheet(
-      context,
+    final ok = await ConfirmSheet(
       ext: 'notification',
       action: FileAction.delete,
     );

@@ -1,43 +1,39 @@
 import 'package:flutter/material.dart';
 
-Future<void> showCreateFolderSheet(BuildContext context) {
-  return showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    backgroundColor: Colors.transparent,
-    builder: (_) => const _CreateFolderSheet(),
-  );
-}
+const _blue = Color(0xFF3859C5);
 
-class _CreateFolderSheet extends StatefulWidget {
-  const _CreateFolderSheet({Key? key}) : super(key: key);
+class CreateFolderSheet extends StatefulWidget {
+  const CreateFolderSheet({super.key});
+
+  static Future<String?> show(BuildContext context) {
+    return showModalBottomSheet<String?>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => const CreateFolderSheet(),
+    );
+  }
 
   @override
-  State<_CreateFolderSheet> createState() => _CreateFolderSheetState();
+  State<CreateFolderSheet> createState() => _CreateFolderSheetState();
 }
 
-class _CreateFolderSheetState extends State<_CreateFolderSheet> {
-  final TextEditingController folderController = TextEditingController();
-  static const blue = Color(0xFF3859C5);
+class _CreateFolderSheetState extends State<CreateFolderSheet> {
+  final TextEditingController _folderController = TextEditingController();
 
   @override
   void dispose() {
-    folderController.dispose();
+    _folderController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom,
-      ),
+      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Container(
         padding: const EdgeInsets.all(20),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-        
-        ),
+        decoration: const BoxDecoration(color: Colors.white),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +41,7 @@ class _CreateFolderSheetState extends State<_CreateFolderSheet> {
             const Text(
               "New folder",
               style: TextStyle(
-                color: blue,
+                color: _blue,
                 fontSize: 24,
                 fontWeight: FontWeight.w800,
               ),
@@ -55,27 +51,27 @@ class _CreateFolderSheetState extends State<_CreateFolderSheet> {
               "Enter a name for this folder",
               style: TextStyle(
                 fontSize: 15,
-                color: blue.withOpacity(0.7),
+                color: _blue.withOpacity(0.7),
                 fontWeight: FontWeight.w400,
               ),
             ),
             const SizedBox(height: 16),
             TextField(
-              controller: folderController,
+              controller: _folderController,
               decoration: InputDecoration(
                 hintText: "Enter Name",
                 hintStyle: TextStyle(
-                  color: blue.withOpacity(0.2),
+                  color: _blue.withOpacity(0.2),
                   fontSize: 18,
                   fontWeight: FontWeight.w400,
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
-                  borderSide: const BorderSide(color: blue, width: 2),
+                  borderSide: const BorderSide(color: _blue, width: 2),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
-                  borderSide: const BorderSide(color: blue, width: 2),
+                  borderSide: const BorderSide(color: _blue, width: 2),
                 ),
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 12,
@@ -112,13 +108,13 @@ class _CreateFolderSheetState extends State<_CreateFolderSheet> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      final folderName = folderController.text.trim();
-                      if (folderName.isNotEmpty) {
-                        Navigator.pop(context, folderName);
+                      final name = _folderController.text.trim();
+                      if (name.isNotEmpty) {
+                        Navigator.pop(context, name);
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: blue,
+                      backgroundColor: _blue,
                       foregroundColor: Colors.white,
                       elevation: 0,
                       padding: const EdgeInsets.symmetric(vertical: 14),

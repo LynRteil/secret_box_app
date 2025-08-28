@@ -36,6 +36,11 @@ class _AuthscreenState extends State<Authscreen> {
     });
   }
 
+
+  bool isFilled(){
+    return emailController.text.isNotEmpty && passwordController.text.isNotEmpty;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

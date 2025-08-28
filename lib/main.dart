@@ -1,25 +1,26 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:secret_box/firebase_options.dart';
-import 'package:secret_box/widgets/audios.dart';
-import 'package:secret_box/widgets/authScreen.dart';
-import 'package:secret_box/widgets/check_email.dart';
-import 'package:secret_box/widgets/cloud_page.dart';
-import 'package:secret_box/widgets/contacts.dart';
-import 'package:secret_box/widgets/documents.dart';
-import 'package:secret_box/widgets/files_page.dart';
-import 'package:secret_box/widgets/folders.dart';
-import 'package:secret_box/widgets/forgot_password.dart';
-import 'package:secret_box/widgets/home_page.dart';
-import 'package:secret_box/widgets/music.dart';
-import 'package:secret_box/widgets/photos.dart';
-import 'package:secret_box/widgets/plan_page.dart';
-import 'package:secret_box/widgets/pro_user_page.dart';
-import 'package:secret_box/widgets/secret_web_page.dart';
-import 'package:secret_box/widgets/security_pin.dart';
-import 'package:secret_box/widgets/set_new_password.dart';
-import 'package:secret_box/widgets/sign_up.dart';
-import 'package:secret_box/widgets/videos.dart';
+import 'package:secret_box/screens/dashboard.dart';
+import 'package:secret_box/screens/audios.dart';
+import 'package:secret_box/screens/authScreen.dart';
+import 'package:secret_box/screens/check_email.dart';
+import 'package:secret_box/screens/cloud_page.dart';
+import 'package:secret_box/screens/contacts.dart';
+import 'package:secret_box/screens/documents.dart';
+import 'package:secret_box/screens/files_page.dart';
+import 'package:secret_box/screens/folders.dart';
+import 'package:secret_box/screens/forgot_password.dart';
+import 'package:secret_box/screens/home_page.dart';
+import 'package:secret_box/screens/music.dart';
+import 'package:secret_box/screens/photos.dart';
+import 'package:secret_box/screens/plan_page.dart';
+import 'package:secret_box/screens/pro_user_page.dart';
+import 'package:secret_box/screens/secret_web_page.dart';
+import 'package:secret_box/screens/security_pin.dart';
+import 'package:secret_box/screens/set_new_password.dart';
+import 'package:secret_box/screens/sign_up.dart';
+import 'package:secret_box/screens/videos.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
         '/forgot-password':(context)=>const ForgotPassword(),
         '/checkemail':(context)=>const CheckEmail(),
         '/setnewpassword':(context)=>const SetNewPassword(),
+        '/setDasboard':(context)=>const Dashboard(),
         
       },
     );

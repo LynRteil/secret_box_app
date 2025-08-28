@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:secret_box/widgets/custom_bottom_navbar.dart';
-import 'package:secret_box/widgets/notifications_page.dart';
-import 'package:secret_box/widgets/settings_page.dart';
+import 'package:secret_box/screens/notifications_page.dart';
+import 'package:secret_box/screens/settings_page.dart';
 
 class SecretWebPage extends StatefulWidget {
   const SecretWebPage({super.key});

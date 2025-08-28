@@ -1,13 +1,21 @@
+import 'package:flutter/material.dart';
 
-  import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+class BuildOption extends StatelessWidget {
+  final String title;
+  final TextStyle style;
+  final bool value;
+  final ValueChanged<bool?> onChanged;
 
-Widget buildOption(
-    String title,
-    TextStyle style,
-    bool value,
-    Function(bool?) onChanged,
-  ) {
+  const BuildOption(
+    this.title,
+    this.style,
+    this.value,
+    this.onChanged, {
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 0),
       child: CheckboxListTile(
@@ -25,4 +33,4 @@ Widget buildOption(
       ),
     );
   }
-
+}

@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:secret_box/widgets/check_option_section.dart';
 import 'package:secret_box/widgets/custom_bottom_navbar.dart';
-import 'package:secret_box/widgets/files_page.dart';
-import 'package:secret_box/widgets/notifications_page.dart';
-import 'package:secret_box/widgets/settings_page.dart';
+import 'package:secret_box/screens/files_page.dart';
+import 'package:secret_box/screens/notifications_page.dart';
+import 'package:secret_box/screens/settings_page.dart';
 import 'package:secret_box/widgets/upload_options_bottom_sheet.dart';
 
-class Folders extends StatefulWidget {
-  const Folders({super.key});
+class Music extends StatefulWidget {
+  const Music({super.key});
 
   @override
-  State<Folders> createState() => _FilesPageState();
+  State<Music> createState() => _FilesPageState();
 }
 
-class _FilesPageState extends State<Folders> {
+class _FilesPageState extends State<Music> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +42,7 @@ class _FilesPageState extends State<Folders> {
 
               const Expanded(
                 child: Text(
-                  "Folders",
+                  "Music",
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: TextStyle(

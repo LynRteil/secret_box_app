@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:secret_box/widgets/show_confirm_sheet.dart';
+import 'package:secret_box/widgets/confirm_sheet.dart';
 
 class ContactDetailPage extends StatefulWidget {
   const ContactDetailPage({super.key, required this.name, required this.phone});
@@ -227,8 +227,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  showConfirmSheet(
-                                    context,
+                                  ConfirmSheet(
                                     ext: 'contact',
                                     action: FileAction.restore,
                                   );
@@ -261,8 +260,7 @@ class _ContactDetailPageState extends State<ContactDetailPage> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  showConfirmSheet(
-                                    context,
+                                 ConfirmSheet(
                                     ext: 'contact',
                                     action: FileAction.delete,
                                   );

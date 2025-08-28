@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:secret_box/widgets/change_passcode_page.dart';
+import 'package:secret_box/screens/change_passcode_page.dart';
 
 class CustomSecurityTile extends StatefulWidget {
   const CustomSecurityTile({super.key});

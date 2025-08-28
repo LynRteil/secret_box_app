@@ -1,35 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:secret_box/widgets/check_option_section.dart';
-import 'package:secret_box/widgets/contact_card.dart';
 import 'package:secret_box/widgets/custom_bottom_navbar.dart';
-import 'package:secret_box/widgets/notifications_page.dart';
-import 'package:secret_box/widgets/settings_page.dart';
-import 'package:secret_box/widgets/show_confirm_sheet.dart';
+import 'package:secret_box/screens/file_detail_page.dart';
+import 'package:secret_box/widgets/file_item.dart';
+import 'package:secret_box/screens/notifications_page.dart';
+import 'package:secret_box/screens/settings_page.dart';
+import 'package:secret_box/widgets/confirm_sheet.dart';
 import 'package:secret_box/widgets/upload_options_bottom_sheet.dart';
 
-
-class Contacts extends StatefulWidget {
-  const Contacts({super.key});
+class Audios extends StatefulWidget {
+  const Audios({super.key});
 
   @override
-  State<Contacts> createState() => _ContactsState();
+  State<Audios> createState() => _FilesPageState();
 }
 
-class _ContactsState extends State<Contacts> {
+class _FilesPageState extends State<Audios> {
   static const blue = Color(0xFF3859C5);
-
-  final contacts = const [
-    {"name": "Andrew Anderson", "phone": "+961 71 123 456"},
-    {"name": "Benjamin Adams", "phone": "+961 71 342 632"},
-    {"name": "Charlotte", "phone": "+961 03 592 591"},
-  ];
 
   bool selectionMode = false;
   final Set<int> selected = {};
 
-  bool get _allSelected =>
-      selected.length == contacts.length && contacts.isNotEmpty;
+  final files = const [
+    {'title': 'Audio 1', 'date': '30/10/21', 'size': '311 KB', 'ext': 'mp3'},
+    {'title': 'Voice Note', 'date': '12/02/22', 'size': '120 KB', 'ext': 'm4a'},
+  ];
+
+  bool get _allSelected => selected.length == files.length && files.isNotEmpty;
 
   void _toggleSelectionMode() {
     setState(() {
@@ -52,19 +50,38 @@ class _ContactsState extends State<Contacts> {
     setState(() {
       selected
         ..clear()
-        ..addAll(List.generate(contacts.length, (i) => i));
+        ..addAll(List.generate(files.length, (i) => i));
     });
   }
 
-  void _clearSelection() => setState(selected.clear);
+  void _clearSelection() {
+    setState(selected.clear);
+  }
 
   Future<void> _bulkRestore() async {
-showConfirmSheet(context, ext: 'contact', action: FileAction.restore);
+    if (selected.isEmpty) return;
+    final firstExt = files[selected.first]['ext'] ?? 'file';
+    final ok = await ConfirmSheet(
+      ext: firstExt,
+      action: FileAction.restore,
+    );
+    if (!mounted) return;
+    if (ok == true) {
+      _clearSelection();
+    }
   }
 
   Future<void> _bulkDelete() async {
     if (selected.isEmpty) return;
-showConfirmSheet(context, ext: 'contact', action: FileAction.delete);
+    final firstExt = files[selected.first]['ext'] ?? 'file';
+    final ok = await ConfirmSheet(
+      ext: firstExt,
+      action: FileAction.delete,
+    );
+    if (!mounted) return;
+    if (ok == true) {
+      _clearSelection();
+    }
   }
 
   @override
@@ -76,7 +93,7 @@ showConfirmSheet(context, ext: 'contact', action: FileAction.delete);
         elevation: 0,
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
-        toolbarHeight: 164,
+        toolbarHeight: 120,
         titleSpacing: 10,
         scrolledUnderElevation: 0,
         title: Container(
@@ -93,7 +110,7 @@ showConfirmSheet(context, ext: 'contact', action: FileAction.delete);
               ),
               const Expanded(
                 child: Text(
-                  "Contacts",
+                  "Audios",
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: TextStyle(
@@ -155,17 +172,17 @@ showConfirmSheet(context, ext: 'contact', action: FileAction.delete);
             ),
           ),
         ],
+      ),
 
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(10),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(30, 0, 16, 12),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(30, 10, 16, 12),
             child: Row(
               children: [
                 Expanded(
                   child: SizedBox(
                     height: 50,
-                    width: 272,
                     child: TextField(
                       textInputAction: TextInputAction.search,
                       decoration: InputDecoration(
@@ -181,15 +198,12 @@ showConfirmSheet(context, ext: 'contact', action: FileAction.delete);
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(
-                            color: blue,
-                            width: 2,
-                          ),
+                          borderSide: const BorderSide(color: blue, width: 2),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide: const BorderSide(
-                            color: blue,
+                            color: Color(0xFF3859C5),
                             width: 2,
                           ),
                         ),
@@ -237,11 +251,7 @@ showConfirmSheet(context, ext: 'contact', action: FileAction.delete);
               ],
             ),
           ),
-        ),
-      ),
 
-      body: Column(
-        children: [
           if (selectionMode)
             Container(
               height: 40,
@@ -285,8 +295,8 @@ showConfirmSheet(context, ext: 'contact', action: FileAction.delete);
                       minimumSize: Size.zero,
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     ),
-                    child: const Row(
-                      children: [
+                    child: Row(
+                      children: const [
                         Text(
                           'Restore',
                           style: TextStyle(
@@ -301,6 +311,7 @@ showConfirmSheet(context, ext: 'contact', action: FileAction.delete);
                       ],
                     ),
                   ),
+
                   TextButton(
                     onPressed: selected.isEmpty ? null : _bulkDelete,
                     style: TextButton.styleFrom(
@@ -309,8 +320,8 @@ showConfirmSheet(context, ext: 'contact', action: FileAction.delete);
                       minimumSize: Size.zero,
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     ),
-                    child: const Row(
-                      children: [
+                    child: Row(
+                      children: const [
                         Text(
                           'Delete',
                           style: TextStyle(
@@ -321,7 +332,11 @@ showConfirmSheet(context, ext: 'contact', action: FileAction.delete);
                           ),
                         ),
                         SizedBox(width: 4),
-                        Icon(Icons.delete_outline, size: 16, color: Colors.white),
+                        Icon(
+                          Icons.delete_outline,
+                          size: 16,
+                          color: Colors.white,
+                        ),
                       ],
                     ),
                   ),
@@ -330,23 +345,41 @@ showConfirmSheet(context, ext: 'contact', action: FileAction.delete);
             ),
 
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-              itemCount: contacts.length,
-              itemBuilder: (context, i) {
-                final c = contacts[i];
-                final isSelected = selected.contains(i);
-
-                return ContactCard(
-                  name: c['name']!,
-                  phone: c['phone']!,
-                  selectionMode: selectionMode,
-                  selected: isSelected,
-                  onSelectedChanged: (v) => _toggleSelect(i, v),
-                  onTap: () {
-                  },
-                );
-              },
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: List.generate(files.length, (i) {
+                  final f = files[i];
+                  final isSelected = selected.contains(i);
+                  return FileItem(
+                    title: f['title']!,
+                    date: f['date']!,
+                    size: f['size']!,
+                    ext: f['ext']!,
+                    selectionMode: selectionMode,
+                    selected: isSelected,
+                    onSelectedChanged: (v) => _toggleSelect(i, v),
+                    onTap: () {
+                      if (selectionMode) {
+                        _toggleSelect(i, !isSelected);
+                        return;
+                      }
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => FileDetailPage(
+                            title: f['title']!,
+                            ext: f['ext']!,
+                            onRestore: () {},
+                            onDelete: () {},
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }),
+              ),
             ),
           ),
         ],
@@ -373,7 +406,8 @@ showConfirmSheet(context, ext: 'contact', action: FileAction.delete);
         ),
       ),
 
-      bottomNavigationBar: const CustomBottomNavBar(),
+
+     bottomNavigationBar: const CustomBottomNavBar(),
     );
   }
 }

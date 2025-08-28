@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:secret_box/widgets/show_confirm_sheet.dart';
+import 'package:secret_box/widgets/confirm_sheet.dart';
 
 class PhotoDetailPage extends StatelessWidget {
   final String title;
@@ -106,8 +106,7 @@ class PhotoDetailPage extends StatelessWidget {
           
                         TextButton(
                           onPressed: () async {
-                            final ok = await showConfirmSheet(
-                              context,
+                            final ok = await ConfirmSheet(
                               ext: 'photo',
                               action: FileAction.restore,
                             );
@@ -138,8 +137,7 @@ class PhotoDetailPage extends StatelessWidget {
           
                         TextButton(
                           onPressed: () async {
-                            final ok = await showConfirmSheet(
-                              context,
+                            final ok = await ConfirmSheet(
                               ext: 'photo',
                               action: FileAction.delete,
                             );

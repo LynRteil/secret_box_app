@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:secret_box/widgets/build_icon_box.dart';
 import 'package:secret_box/widgets/custom_bottom_navbar.dart';
-import 'package:secret_box/widgets/fake_pin_expandable_tile.dart';
-import 'package:secret_box/widgets/notifications_page.dart';
+import 'package:secret_box/screens/fake_pin_expandable_tile.dart';
+import 'package:secret_box/screens/notifications_page.dart';
 import 'package:secret_box/widgets/option_tile.dart';
-import 'package:secret_box/widgets/settings_page.dart';
+import 'package:secret_box/screens/settings_page.dart';
 
 class ProUserPage extends StatelessWidget {
   const ProUserPage({super.key});

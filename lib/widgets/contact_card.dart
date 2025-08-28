@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:secret_box/widgets/contact_detail_page.dart';
+import 'package:secret_box/screens/contact_detail_page.dart';
 
 class ContactCard extends StatelessWidget {
   const ContactCard({

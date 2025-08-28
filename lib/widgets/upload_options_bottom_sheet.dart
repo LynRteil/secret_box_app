@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:secret_box/models/option_item.dart';
-import 'package:secret_box/widgets/show_document_picker.dart';
-import 'package:secret_box/widgets/show_import_contacts_sheet.dart';
-import 'package:secret_box/widgets/show_modal_bottom_sheet.dart';
-import 'package:secret_box/widgets/show_picture_sheet.dart';
+import 'package:secret_box/widgets/document_picker_sheet.dart';
+import 'package:secret_box/widgets/import_contacts_sheet.dart';
+import 'package:secret_box/widgets/create_folder_sheet.dart';
+import 'package:secret_box/widgets/picture_sheet.dart';
 
 class UploadOptionsBottomSheet extends StatelessWidget {
   const UploadOptionsBottomSheet({super.key});
@@ -16,35 +16,35 @@ class UploadOptionsBottomSheet extends StatelessWidget {
         "Upload Documents",
         "assets/icons/documents.svg",
         onPressed: (ctx) {
-          showDocumentPicker(ctx);
+          DocumentPickerSheet.show(ctx);
         },
       ),
       OptionItem(
         "Upload Photos/Videos",
         "assets/icons/videos.svg",
         onPressed: (ctx) {
-          showPictureSheet(ctx);
+          PictureSheet.show(ctx);
         },
       ),
       OptionItem(
         "Upload Contacts",
         "assets/icons/contacts.svg",
         onPressed: (ctx) {
-          showImportContactsSheet(ctx);
+          ImportContactsSheet.show(ctx);
         },
       ),
       OptionItem(
         "Upload Music/Audios",
         "assets/icons/audios.svg",
         onPressed: (ctx) {
-          showDocumentPicker(ctx);
+          DocumentPickerSheet.show(ctx);
         },
       ),
       OptionItem(
         "Create Folder",
         "assets/icons/folders.svg",
         onPressed: (ctx) {
-          showCreateFolderSheet(ctx);
+          CreateFolderSheet.show(ctx);
         },
       ),
     ];

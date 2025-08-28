@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-import 'package:secret_box/widgets/show_confirm_sheet.dart';
+import 'package:secret_box/widgets/confirm_sheet.dart';
 
 class VideoDetailPage extends StatefulWidget {
   final String title;
@@ -231,8 +231,8 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                           ),
                           TextButton(
                             onPressed: () async {
-                              final ok = await showConfirmSheet(
-                                context,
+                              final ok = await ConfirmSheet(
+                           
                                 ext: 'video',
                                 action: FileAction.restore,
                               );
@@ -264,8 +264,7 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                           ),
                           TextButton(
                             onPressed: () async {
-                              final ok = await showConfirmSheet(
-                                context,
+                              final ok = await ConfirmSheet(
                                 ext: 'video',
                                 action: FileAction.delete,
                               );

@@ -2,36 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:secret_box/widgets/check_option_section.dart';
 import 'package:secret_box/widgets/custom_bottom_navbar.dart';
-import 'package:secret_box/widgets/notifications_page.dart';
-import 'package:secret_box/widgets/photo_detail_page.dart';
-import 'package:secret_box/widgets/settings_page.dart';
-import 'package:secret_box/widgets/show_confirm_sheet.dart';
+import 'package:secret_box/screens/notifications_page.dart';
+import 'package:secret_box/screens/settings_page.dart';
+import 'package:secret_box/widgets/confirm_sheet.dart';
 import 'package:secret_box/widgets/upload_options_bottom_sheet.dart';
+import 'package:secret_box/screens/video_detail_page.dart';
+import 'package:secret_box/widgets/video_list_preview.dart';
 
-class Photos extends StatefulWidget {
-  const Photos({super.key});
+class Videos extends StatefulWidget {
+  const Videos({super.key});
 
   @override
-  State<Photos> createState() => _PhotosPageState();
+  State<Videos> createState() => _VideosPageState();
 }
 
-class _PhotosPageState extends State<Photos> {
+class _VideosPageState extends State<Videos> {
   static const blue = Color(0xFF3859C5);
 
   bool selectionMode = false;
   final Set<int> selected = {};
 
-  final photos = const [
+  final videos = const [
     {
-      'title': 'Beach ',
-      'date': '30/10/21',
-      'size': '1.2 MB',
-      'path': 'assets/images/photo1.jpeg',
+      'title': 'Travel Vlog',
+      'date': '02/11/23',
+      'size': '15 MB',
+      'path': 'assets/videos/video1.mp4',
     },
   ];
 
   bool get _allSelected =>
-      selected.length == photos.length && photos.isNotEmpty;
+      selected.length == videos.length && videos.isNotEmpty;
 
   void _toggleSelectionMode() {
     setState(() {
@@ -54,7 +55,7 @@ class _PhotosPageState extends State<Photos> {
     setState(() {
       selected
         ..clear()
-        ..addAll(List.generate(photos.length, (i) => i));
+        ..addAll(List.generate(videos.length, (i) => i));
     });
   }
 
@@ -64,9 +65,8 @@ class _PhotosPageState extends State<Photos> {
 
   Future<void> _bulkRestore() async {
     if (selected.isEmpty) return;
-    final ok = await showConfirmSheet(
-      context,
-      ext: 'photo',
+    final ok = await ConfirmSheet(
+      ext: 'video',
       action: FileAction.restore,
     );
     if (!mounted) return;
@@ -77,9 +77,8 @@ class _PhotosPageState extends State<Photos> {
 
   Future<void> _bulkDelete() async {
     if (selected.isEmpty) return;
-    final ok = await showConfirmSheet(
-      context,
-      ext: 'photo',
+    final ok = await ConfirmSheet(
+      ext: 'video',
       action: FileAction.delete,
     );
     if (!mounted) return;
@@ -114,7 +113,7 @@ class _PhotosPageState extends State<Photos> {
               ),
               const Expanded(
                 child: Text(
-                  "Photos",
+                  "Videos",
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: TextStyle(
@@ -350,9 +349,9 @@ class _PhotosPageState extends State<Photos> {
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.all(16),
-              itemCount: photos.length,
+              itemCount: videos.length,
               itemBuilder: (context, i) {
-                final p = photos[i];
+                final v = videos[i];
                 final isSelected = selected.contains(i);
 
                 return GestureDetector(
@@ -364,9 +363,9 @@ class _PhotosPageState extends State<Photos> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => PhotoDetailPage(
-                          title: p['title']!,
-                          path: p['path']!,
+                        builder: (_) => VideoDetailPage(
+                          title: v['title']!,
+                          path: v['path']!,
                           onRestore: () {},
                           onDelete: () {},
                         ),
@@ -375,19 +374,15 @@ class _PhotosPageState extends State<Photos> {
                   },
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 12),
-
                     child: ListTile(
-                      leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: Image.asset(
-                          p['path']!,
-                          width: 68,
-                          height: 62,
-                          fit: BoxFit.cover,
-                        ),
+                      leading: const VideoListPreview(
+                        path: 'assets/videos/video1.mp4',
+                        width: 62,
+                        height: 68,
                       ),
+
                       title: Text(
-                        p['title']!,
+                        v['title']!,
                         style: const TextStyle(
                           fontFamily: 'Gilroy',
                           fontWeight: FontWeight.w600,
@@ -395,10 +390,7 @@ class _PhotosPageState extends State<Photos> {
                       ),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("${p['date']}  "),
-                          Text("${p['size']}"),
-                        ],
+                        children: [Text(v['date']!), Text(v['size']!)],
                       ),
                       trailing: selectionMode
                           ? Checkbox(
@@ -438,7 +430,7 @@ class _PhotosPageState extends State<Photos> {
         ),
       ),
 
-      bottomNavigationBar: const CustomBottomNavBar(),
+     bottomNavigationBar: const CustomBottomNavBar(),
     );
   }
 }
